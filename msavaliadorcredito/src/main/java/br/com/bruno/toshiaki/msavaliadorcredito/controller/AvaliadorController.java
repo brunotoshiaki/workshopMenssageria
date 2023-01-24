@@ -1,6 +1,7 @@
 package br.com.bruno.toshiaki.msavaliadorcredito.controller;
 
-import br.com.bruno.toshiaki.msavaliadorcredito.controller.domain.model.SituacaoCliente;
+import br.com.bruno.toshiaki.msavaliadorcredito.clients.ex.DadosClientesNotFoundException;
+import br.com.bruno.toshiaki.msavaliadorcredito.clients.ex.ErroComunicaoException;
 import br.com.bruno.toshiaki.msavaliadorcredito.service.AvaliadorCreditoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,9 +23,14 @@ public class AvaliadorController {
   }
 
   @GetMapping(value = "/situacao-cliente", params = "cpf")
-  public ResponseEntity<SituacaoCliente> consultaSituacaoCliente(@RequestParam("cpf") final String cpf) {
-    final var response = this.avaliadorCreditoService.obterSituacao(cpf);
-    return ResponseEntity.ok().body(response);
+  public ResponseEntity consultaSituacaoCliente(@RequestParam("cpf") final String cpf) {
+    try {
+      final var response = this.avaliadorCreditoService.obterSituacao(cpf);
+      return ResponseEntity.ok().body(response);
+    } catch (final DadosClientesNotFoundException e) {
+      return ResponseEntity.notFound().build();
+    } catch (final ErroComunicaoException e) {
+      return ResponseEntity.badRequest().build();
+    }
   }
-
 }
