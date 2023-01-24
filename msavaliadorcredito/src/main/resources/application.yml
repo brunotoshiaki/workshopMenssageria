@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: msavaliadorcredito
+  cloud:
+    openfeign:
+      lazy-attributes-resolution: true
+server:
+  port: 0
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    instance-id: ${spring.application.name}:${vcap.application.instance_id:${random.value}}
+
+
+
