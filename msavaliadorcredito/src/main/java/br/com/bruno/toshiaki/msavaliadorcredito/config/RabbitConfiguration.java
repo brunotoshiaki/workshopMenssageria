@@ -1,4 +1,4 @@
-package br.com.bruno.toshiaki.mscartoes.config;
+package br.com.bruno.toshiaki.msavaliadorcredito.config;
 
 import org.springframework.amqp.core.Queue;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,8 +16,6 @@ public class RabbitConfiguration {
   public Queue myQueue() {
     return new Queue(this.queueName);
   }
-
-
 
 
 }

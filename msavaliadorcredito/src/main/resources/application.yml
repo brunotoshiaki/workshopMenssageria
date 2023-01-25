@@ -1,6 +1,11 @@
 spring:
   application:
     name: msavaliadorcredito
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
   cloud:
     openfeign:
       lazy-attributes-resolution: true
@@ -16,3 +21,5 @@ eureka:
 
 
 
+rabbitmq:
+  queue: emisso-cartoes

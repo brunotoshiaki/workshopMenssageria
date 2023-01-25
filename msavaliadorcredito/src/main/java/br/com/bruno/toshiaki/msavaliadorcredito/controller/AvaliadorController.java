@@ -48,7 +48,8 @@ public class AvaliadorController {
     } catch (final ErroComunicaoException e) {
       return ResponseEntity.badRequest().build();
     }
-
   }
+
+
 
 }

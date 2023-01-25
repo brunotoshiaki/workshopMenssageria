@@ -26,6 +26,8 @@ public class AvaliadorCreditoService {
   private final ClienteClient clienteClient;
   private final CartaoClient cartaoClient;
 
+
+
   private static CartaoAprovado getCartaoAprovado(final ResponseEntity<DadosCliente> cliente, final Cartao c) {
     final BigDecimal limiteAprovado = calcularLimite(cliente, c);
     return new CartaoAprovado(c.nome(), c.bandeira(), limiteAprovado);
@@ -74,6 +76,7 @@ public class AvaliadorCreditoService {
     }
     throw new ErroComunicaoException();
   }
+
 
 
 }
