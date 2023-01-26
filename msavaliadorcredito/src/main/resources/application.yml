@@ -19,6 +19,17 @@ eureka:
   instance:
     instance-id: ${spring.application.name}:${vcap.application.instance_id:${random.value}}
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: "env,beans"
+
+logging:
+  file:
+    name: ./logs/log-file.log
+
 
 
 rabbitmq:

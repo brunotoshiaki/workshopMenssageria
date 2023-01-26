@@ -56,6 +56,10 @@
     </dependency>
 
     <dependency>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+      <groupId>org.springframework.boot</groupId>
+    </dependency>
+    <dependency>
       <artifactId>mapstruct</artifactId>
       <groupId>org.mapstruct</groupId>
       <version>1.5.3.Final</version>
@@ -67,11 +71,6 @@
       <version>1.5.3.Final</version>
     </dependency>
 
-    <dependency>
-      <artifactId>mysql-connector-j</artifactId>
-      <groupId>com.mysql</groupId>
-      <scope>runtime</scope>
-    </dependency>
 
   </dependencies>
   <dependencyManagement>

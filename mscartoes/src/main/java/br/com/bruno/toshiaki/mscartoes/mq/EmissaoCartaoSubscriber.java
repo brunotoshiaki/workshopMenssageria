@@ -7,12 +7,14 @@ import br.com.bruno.toshiaki.mscartoes.repository.CartaoRepository;
 import br.com.bruno.toshiaki.mscartoes.repository.ClienteCartaoRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class EmissaoCartaoSubscriber {
 
 
@@ -26,7 +28,7 @@ public class EmissaoCartaoSubscriber {
       final var dados = mapper.readValue(payload, SolicitacaoEmissaoCartao.class);
       this.gerarCartao(dados);
     } catch (final Exception ex) {
-      ex.printStackTrace();
+      log.error("Erro ao receber uma solicitacao de emissao: ", ex);
     }
   }
 
