@@ -9,7 +9,6 @@ import br.com.bruno.toshiaki.mscartoes.domain.Cartao;
 import br.com.bruno.toshiaki.mscartoes.service.CartaoService;
 import br.com.bruno.toshiaki.mscartoes.service.ClienteCartaoService;
 import java.util.List;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -58,7 +57,8 @@ public class CartoesController {
     final var cartoes = this.clienteCartaoService.listCartoesByCpf(cpf);
     final var response = cartoes
         .stream()
-        .map(ClienteCartaoMapper::fromModel).collect(Collectors.toList());
+        .map(ClienteCartaoMapper::fromModel)
+        .toList();
     return ResponseEntity.ok(response);
   }
 

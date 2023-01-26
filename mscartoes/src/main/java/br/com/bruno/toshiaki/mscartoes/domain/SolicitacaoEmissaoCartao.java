@@ -1,4 +1,4 @@
-package br.com.bruno.toshiaki.msavaliadorcredito.controller.domain.model;
+package br.com.bruno.toshiaki.mscartoes.domain;
 
 import java.math.BigDecimal;
 

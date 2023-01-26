@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import java.math.BigDecimal;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -22,8 +23,17 @@ public class ClienteCartao {
   @JoinColumn(name = "id_cartao")
   private Cartao cartao;
 
-  public ClienteCartao(String cpf, Cartao cartao) {
-    this.cpf = cpf;
-    this.cartao = cartao;
+  private BigDecimal limite;
+
+
+  public static ClienteCartao criarClienteCartao(final Cartao cartao, final String cpf, final BigDecimal limite) {
+    final var clienteCartao = new ClienteCartao();
+    clienteCartao.setCartao(cartao);
+    clienteCartao.setCpf(cpf);
+    clienteCartao.setLimite(limite);
+
+    return clienteCartao;
   }
+
+
 }
