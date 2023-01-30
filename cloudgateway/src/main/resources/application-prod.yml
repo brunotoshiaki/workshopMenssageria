@@ -21,4 +21,3 @@ eureka:
     register-with-eureka: true
     serviceUrl:
       defaultZone: http://user:user@${EUREKA_SERVER}:8761/eureka/
-

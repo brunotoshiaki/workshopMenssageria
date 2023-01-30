@@ -11,4 +11,4 @@ COPY --from=build ./app/target/*.jar ./app.jar
 ARG RABBITMQ_SERVER=rabbitmq-host
 ARG EUREKA_SERVER=localhost
 
-ENTRYPOINT java -jar -Dspring.profiles.active=production app.jar
+ENTRYPOINT java -jar -Dspring.profiles.active=prod app.jar

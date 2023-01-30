@@ -1,0 +1,120 @@
+version: '3.8'
+services:
+  eureka:
+    container_name: eureka
+    hostname: eureka
+    build: 
+     context: ./discorveryserver     
+    ports:
+      - '8761:8761'
+    networks:
+      - curso
+   
+  keycloak:
+    container_name: keycloak
+    image: quay.io/keycloak/keycloak:20.0.3
+    hostname: keycloak 
+    ports:
+      - '8081:8080'
+    networks:
+      - curso
+    environment:
+      KEYCLOAK_ADMIN: admin 
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    command: 
+      - start-dev --import-realm
+    volumes:
+      - ./keycloak/realm-export-docker.json:/opt/keycloak/data/import/realm-export.json
+    
+      
+  rabbitmq:
+    container_name: "rabbitmq-host"
+    hostname: rabbitmq-host
+    image: rabbitmq:3.6-management-alpine
+    ports:
+        # AMQP protocol port
+     - '5672:5672'
+        # HTTP management UI
+     - '15672:15672'
+    networks:
+      - curso
+    environment:
+     - RABBITMQ_DEFAULT_USER=guest
+     - RABBITMQ_DEFAULT_PASS=guest
+  
+  cliente:
+    container_name: cliente
+    hostname: cliente
+    build: 
+     context: ./clients     
+    networks:
+      - curso
+    depends_on:
+      - eureka
+    environment:
+      - EUREKA_SERVER=eureka
+
+  cartao:
+    container_name: cartao
+    hostname: cartao
+    build: 
+     context: ./mscartoes     
+    networks:
+      - curso
+    depends_on:
+      - eureka
+      - rabbitmq
+    environment:
+      - EUREKA_SERVER=eureka
+      - RABBITMQ_SERVER=rabbitmq
+  
+  avaliacaocredito:
+    container_name: avaliacaocredito
+    hostname: avaliacaocredito
+    build: 
+     context: ./msavaliadorcredito     
+    networks:
+      - curso
+    depends_on:
+      - eureka
+      - rabbitmq
+    environment:
+      - EUREKA_SERVER=eureka
+      - RABBITMQ_SERVER=rabbitmq
+  
+
+  gateway:
+    container_name: gateway
+    hostname: gateway
+    build: 
+      context: ./cloudgateway
+    ports:
+      - '8080:8080'
+    networks:
+      - curso
+    environment:
+      - EUREKA_SERVER=eureka
+      - KEYCLOAK_SERVER=keycloak
+      - KEYCLOAK_PORT=8080
+    depends_on:
+      - eureka
+      - keycloak
+    restart: always
+
+
+
+  
+networks:
+  curso:
+    driver: bridge
+
+  
+
+
+
+      
+
+
+
+
+     

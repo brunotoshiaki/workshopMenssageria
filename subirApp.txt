@@ -1,0 +1,5 @@
+mvn -f E:\Bruno\Estudos\workshopMenssageria\discorveryserver\pom.xml spring-boot:run
+mvn -f E:\Bruno\Estudos\workshopMenssageria\clients\pom.xml spring-boot:run
+mvn -f E:\Bruno\Estudos\workshopMenssageria\msavaliadorcredito\pom.xml spring-boot:run
+mvn -f E:\Bruno\Estudos\workshopMenssageria\mscartoes\pom.xml spring-boot:run
+mvn -f E:\Bruno\Estudos\workshopMenssageria\cloudgateway\pom.xml spring-boot:run
